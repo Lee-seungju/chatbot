@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/back_btn"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/back"/>-->
 
     </LinearLayout>
 
@@ -25,6 +25,7 @@
         android:layout_height="100dp">
 
         <TextView
+            android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Setting"
@@ -48,6 +49,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reset_btn"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginHorizontal="30dp"

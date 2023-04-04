@@ -15,4 +15,9 @@ class MessageRepository(private val messageDao: MessageDAO) {
     suspend fun insert(message: Message) {
         messageDao.insert(message)
     }
+
+    @WorkerThread
+    suspend fun removeAll() {
+        messageDao.deleteAll()
+    }
 }

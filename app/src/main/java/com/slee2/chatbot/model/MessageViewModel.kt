@@ -12,6 +12,10 @@ class MessageViewModel(private val repository: MessageRepository) : ViewModel() 
     fun insert(message: Message) = viewModelScope.launch {
         repository.insert(message)
     }
+
+    fun deleteAll() = viewModelScope.launch {
+        repository.removeAll()
+    }
 }
 
 class MessageViewModelFactory(private val repository: MessageRepository) : ViewModelProvider.Factory {
