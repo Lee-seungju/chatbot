@@ -1,4 +1,4 @@
-package com.slee2.chatbot.ui
+package com.slee2.chatbot.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
