@@ -1,4 +1,4 @@
-package com.slee2.chatbot.data
+package com.slee2.chatbot.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

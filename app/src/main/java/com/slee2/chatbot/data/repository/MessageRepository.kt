@@ -1,9 +1,8 @@
-package com.slee2.chatbot.repository
+package com.slee2.chatbot.data.repository
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.asFlow
-import com.slee2.chatbot.data.MessageDAO
-import com.slee2.chatbot.data.Message
+import com.slee2.chatbot.data.db.MessageDAO
+import com.slee2.chatbot.data.model.Message
 import kotlinx.coroutines.flow.Flow
 
 class MessageRepository(private val messageDao: MessageDAO) {

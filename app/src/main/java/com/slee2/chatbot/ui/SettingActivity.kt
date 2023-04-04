@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.slee2.chatbot.databinding.ActivitySettingBinding
-import com.slee2.chatbot.datasource.MessageRoomDatabase
-import com.slee2.chatbot.model.MessageViewModel
-import com.slee2.chatbot.model.MessageViewModelFactory
-import com.slee2.chatbot.repository.MessageRepository
+import com.slee2.chatbot.data.db.MessageRoomDatabase
+import com.slee2.chatbot.data.model.MessageViewModel
+import com.slee2.chatbot.data.model.MessageViewModelFactory
+import com.slee2.chatbot.data.repository.MessageRepository
 
 class SettingActivity : AppCompatActivity() {
 

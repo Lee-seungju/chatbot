@@ -8,12 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.slee2.chatbot.adapter.MessageAdapter
-import com.slee2.chatbot.data.Message
+import com.slee2.chatbot.data.model.Message
 import com.slee2.chatbot.databinding.ActivityMainBinding
-import com.slee2.chatbot.datasource.MessageRoomDatabase
-import com.slee2.chatbot.model.MessageViewModel
-import com.slee2.chatbot.model.MessageViewModelFactory
-import com.slee2.chatbot.repository.MessageRepository
+import com.slee2.chatbot.data.db.MessageRoomDatabase
+import com.slee2.chatbot.data.model.MessageViewModel
+import com.slee2.chatbot.data.model.MessageViewModelFactory
+import com.slee2.chatbot.data.repository.MessageRepository
 
 class MainActivity : AppCompatActivity() {
 

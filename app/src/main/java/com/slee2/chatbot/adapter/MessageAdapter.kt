@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.slee2.chatbot.R
-import com.slee2.chatbot.data.Message
+import com.slee2.chatbot.data.model.Message
 
 class MessageAdapter(private val context: Context, private val messageList: MutableList<Message>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){

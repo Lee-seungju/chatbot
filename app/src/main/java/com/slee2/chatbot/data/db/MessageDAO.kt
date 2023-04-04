@@ -1,6 +1,7 @@
-package com.slee2.chatbot.data
+package com.slee2.chatbot.data.db
 
 import androidx.room.*
+import com.slee2.chatbot.data.model.Message
 import kotlinx.coroutines.flow.Flow
 
 @Dao

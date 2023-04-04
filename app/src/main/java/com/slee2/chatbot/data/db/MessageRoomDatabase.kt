@@ -1,17 +1,12 @@
-package com.slee2.chatbot.datasource
+package com.slee2.chatbot.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import com.slee2.chatbot.data.Message
-import com.slee2.chatbot.data.MessageDAO
-import com.slee2.chatbot.utils.Converters
+import com.slee2.chatbot.data.model.Message
 
 @Database(entities = arrayOf(Message::class), version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
 abstract class MessageRoomDatabase : RoomDatabase() {
 
     abstract fun messageDao(): MessageDAO

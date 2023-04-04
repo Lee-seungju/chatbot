@@ -1,8 +1,7 @@
-package com.slee2.chatbot.model
+package com.slee2.chatbot.data.model
 
 import androidx.lifecycle.*
-import com.slee2.chatbot.data.Message
-import com.slee2.chatbot.repository.MessageRepository
+import com.slee2.chatbot.data.repository.MessageRepository
 import kotlinx.coroutines.launch
 
 class MessageViewModel(private val repository: MessageRepository) : ViewModel() {
