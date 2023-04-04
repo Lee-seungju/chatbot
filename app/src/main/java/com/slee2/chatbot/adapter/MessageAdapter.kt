@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.slee2.chatbot.R
 import com.slee2.chatbot.data.Message
 
-class MessageAdapter(private val context: Context, private val messageList: ArrayList<Message>):
+class MessageAdapter(private val context: Context, private val messageList: MutableList<Message>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -39,7 +39,6 @@ class MessageAdapter(private val context: Context, private val messageList: Arra
     }
 
     override fun getItemViewType(position: Int): Int {
-
         val currentMessage = messageList[position]
         return currentMessage.type
     }
