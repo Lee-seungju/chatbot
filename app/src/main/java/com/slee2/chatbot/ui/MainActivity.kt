@@ -1,5 +1,6 @@
 package com.slee2.chatbot.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity() {
             messageViewModel.insert(messageObject)
 
             Log.i("MainActivity", "ok")
+        }
+
+        binding.settingBtn.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
         }
     }
 }
