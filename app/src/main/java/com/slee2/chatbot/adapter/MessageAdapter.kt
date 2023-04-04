@@ -1,4 +1,4 @@
-package com.slee2.chatbot.chat
+package com.slee2.chatbot.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.slee2.chatbot.R
+import com.slee2.chatbot.data.Message
 
 class MessageAdapter(private val context: Context, private val messageList: ArrayList<Message>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private val receive = 1
-    private val send = 2
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if(viewType == 1) {
+        return if(viewType == 0) {
             val view: View = LayoutInflater.from(context).inflate(R.layout.receive, parent, false)
             ReceiveViewHolder(view)
         } else {
@@ -43,8 +41,7 @@ class MessageAdapter(private val context: Context, private val messageList: Arra
     override fun getItemViewType(position: Int): Int {
 
         val currentMessage = messageList[position]
-
-        return send
+        return currentMessage.type
     }
 
     class SendViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
