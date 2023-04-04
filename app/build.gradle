@@ -6,6 +6,14 @@ plugins {
 }
 kapt { generateStubs = true }
 
+// 프로젝트 레벨 build.gradle 파일 상단에 추가
+Properties localProperties = new Properties()
+File localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.newDataInputStream())
+}
+
+
 android {
     namespace 'com.slee2.chatbot'
     compileSdk 33
@@ -16,7 +24,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        buildConfigField("String", "GPT_API_KEY","\"${GPT_API_KEY}\"")
+        buildConfigField("String", "GPT_API_KEY","\"${localProperties.getProperty('GPT_API_KEY')}\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
