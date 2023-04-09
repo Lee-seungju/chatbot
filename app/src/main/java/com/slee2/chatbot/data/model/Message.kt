@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "message")
 data class Message(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") var _id: Int = 0,
-    @ColumnInfo(name = "message") var message: String,
-    @ColumnInfo(name = "type") var type: Int,
+    @PrimaryKey(autoGenerate = true)
+    var _id: Int = 0,
+    var message: String,
+    var type: Int,
 ) {
 }

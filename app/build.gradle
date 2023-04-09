@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 kapt { generateStubs = true }
 
@@ -12,7 +13,6 @@ File localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.newDataInputStream())
 }
-
 
 android {
     namespace 'com.slee2.chatbot'
@@ -51,6 +51,9 @@ android {
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
+    kapt {
+        correctErrorTypes true
+    }
 }
 
 dependencies {
@@ -84,18 +87,17 @@ dependencies {
     // Dependencies for working with Architecture components
     // You'll probably have to update the version numbers in build.gradle (Project)
 
-    // Room components
+    // Room
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
 
-    // Lifecycle components
+    // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
 
-    // Kotlin components
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Coroutine
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 
@@ -113,5 +115,31 @@ dependencies {
 
     // Retrofit (API)
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    
+    // Moshi
+    implementation 'com.squareup.moshi:moshi:1.9.3'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+
+    // OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    // Preferences Data Store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:2.41"
+    kapt "com.google.dagger:hilt-compiler:2.41"
+
+    // ViewModel delegate
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
+}
+
+kapt {
+    correctErrorTypes true
 }
