@@ -1,17 +1,15 @@
 package com.slee2.chatbot.data.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class MessageResponse(
-    @field:Json(name = "finish_reason")
+    @SerializedName("finish_reason")
     val finishReason: String,
-    @field:Json(name = "index")
+    @SerializedName("index")
     val index: Int,
-    @field:Json(name = "logprobs")
+    @SerializedName("logprobs")
     val logprobs: Any,
-    @field:Json(name = "text")
+    @SerializedName("text")
     val text: String
 )

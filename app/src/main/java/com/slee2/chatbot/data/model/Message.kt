@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "message")
 data class Message(
     @PrimaryKey(autoGenerate = true)
-    var _id: Int = 0,
+    var _id: Long = 0,
     var message: String,
     var type: Int,
 ) {

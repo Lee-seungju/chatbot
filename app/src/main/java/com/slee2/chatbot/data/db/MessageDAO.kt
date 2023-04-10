@@ -7,8 +7,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MessageDAO {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(message: Message)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(message: Message): Long
+
+    @Query("SELECT * FROM message WHERE _id = :id")
+    fun getMessageById(id: Long): Flow<Message>
+
+    @Query("SELECT GROUP_CONCAT(message, '\n') FROM message")
+    fun getAllMessagesConcatenated(): Flow<String>
 
     @Query("DELETE FROM message")
     suspend fun deleteAll()

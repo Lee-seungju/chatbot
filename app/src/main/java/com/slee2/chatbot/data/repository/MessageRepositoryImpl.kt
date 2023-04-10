@@ -6,12 +6,13 @@ import androidx.datastore.preferences.core.*
 import com.slee2.chatbot.data.api.GptAPI
 import com.slee2.chatbot.data.db.MessageRoomDatabase
 import com.slee2.chatbot.data.model.Message
-import com.slee2.chatbot.data.model.SearchResponse
+import com.slee2.chatbot.data.model.SendMessageResponse
 import com.slee2.chatbot.data.repository.MessageRepositoryImpl.PreferencesKeys.SORT_MODE
 import com.slee2.chatbot.utils.Sort
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
@@ -28,12 +29,12 @@ class MessageRepositoryImpl @Inject constructor (
         prompt: String,
         temperature: Double,
         frequencyPenalty: Double
-    ): Response<SearchResponse> {
+    ): Call<SendMessageResponse> {
         val body = HashMap<String, Any>()
         body.put("model", "text-davinci-003")
         body.put("max_tokens", 3900)
-        body.put("top_p", 1)
         body.put("temperature", temperature)
+        body.put("top_p", 1)
         body.put("frequency_penalty", frequencyPenalty)
         body.put("prompt", prompt)
         return api.sendChat(body)
@@ -41,8 +42,17 @@ class MessageRepositoryImpl @Inject constructor (
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    override suspend fun insert(message: Message) {
-        db.messageDao().insert(message)
+    override suspend fun insert(message: Message): Long {
+        return db.messageDao().insert(message)
+    }
+
+    @WorkerThread
+    override suspend fun getMessageById(id: Long): Flow<Message> {
+        return db.messageDao().getMessageById(id)
+    }
+
+    override fun getAllMessagesConcatenated(): Flow<String> {
+        return db.messageDao().getAllMessagesConcatenated()
     }
 
     @WorkerThread

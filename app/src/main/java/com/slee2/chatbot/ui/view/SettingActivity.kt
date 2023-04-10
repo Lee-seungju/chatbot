@@ -14,7 +14,7 @@ import com.slee2.chatbot.databinding.ActivitySettingBinding
 import com.slee2.chatbot.ui.viewmodel.SettingViewModel
 import com.slee2.chatbot.utils.Calculator
 import com.slee2.chatbot.utils.SettingType.FREQUENCY_PENALTY
-import com.slee2.chatbot.utils.SettingType.PREFERENCE
+import com.slee2.chatbot.utils.SettingType.TEMPERATURE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -44,7 +44,7 @@ class SettingActivity : AppCompatActivity() {
 
         binding.saveBtn.setOnClickListener {
             val preference: Double = calculator.convertIntToPreference(binding.tpSeekBar.progress)
-            val preferenceSetting = Setting(PREFERENCE, preference)
+            val preferenceSetting = Setting(TEMPERATURE, preference)
             val frequencyPenalty: Double = calculator.convertIntToFrequencyPenalty(binding.fpSeekBar.progress)
             val frequencyPenaltySetting = Setting(FREQUENCY_PENALTY, frequencyPenalty)
             settingViewModel.saveSetting(preferenceSetting)
@@ -58,7 +58,7 @@ class SettingActivity : AppCompatActivity() {
         lifecycleScope.launch {
             settingViewModel.allSettings.collectLatest { settings ->
                 for (setting in settings) {
-                    if (setting.type == PREFERENCE) {
+                    if (setting.type == TEMPERATURE) {
                         binding.tpProgress.text = setting.value.toString()
                         binding.tpSeekBar.progress = calculator.convertIntByPreference(setting.value)
                     } else if (setting.type == FREQUENCY_PENALTY) {
