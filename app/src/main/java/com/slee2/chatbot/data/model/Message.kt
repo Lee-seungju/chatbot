@@ -1,6 +1,5 @@
 package com.slee2.chatbot.data.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -10,5 +9,6 @@ data class Message(
     var _id: Long = 0,
     var message: String,
     var type: Int,
+    var status: Int
 ) {
 }

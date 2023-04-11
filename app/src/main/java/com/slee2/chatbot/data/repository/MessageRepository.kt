@@ -19,6 +19,8 @@ interface MessageRepository {
     suspend fun getMessageById(id: Long): Flow<Message>
 
     fun getAllMessagesConcatenated(): Flow<String>
+
+    fun getLastTowMessage(): Flow<String>
     suspend fun removeAll()
 
     fun getAllMessage(): Flow<List<Message>>

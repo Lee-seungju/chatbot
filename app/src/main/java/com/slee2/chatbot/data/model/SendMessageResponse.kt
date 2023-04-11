@@ -15,5 +15,7 @@ data class SendMessageResponse(
     @SerializedName("object")
     val objectX: String,
     @SerializedName("usage")
-    val usage: Usage
+    val usage: Usage,
+    @SerializedName("error")
+    val error: Error
 )

@@ -3,10 +3,14 @@ package com.slee2.chatbot.data.model
 import android.util.Log
 import androidx.lifecycle.*
 import com.slee2.chatbot.data.repository.MessageRepository
+import com.slee2.chatbot.utils.StatusType.ERROR
+import com.slee2.chatbot.utils.StatusType.LOADING
+import com.slee2.chatbot.utils.StatusType.SUCCESS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,16 +31,24 @@ class MessageViewModel @Inject constructor(
                     temperature: Double,
                     frequencyPenalty: Double
     ) = viewModelScope.launch(Dispatchers.IO) {
-        val allMessagesConcatenated = messageRepository.getAllMessagesConcatenated().firstOrNull() + '\n' + message
+        var allMessagesConcatenated = "\n" + message
+        val lastTowMessage = messageRepository.getLastTowMessage()
+        lastTowMessage.map {
+            if ((allMessagesConcatenated + it).length < 3900) {
+                allMessagesConcatenated = "\n" + it + allMessagesConcatenated
+            } else {
+                return@map
+            }
+        }
 
         val messageObject = Message(
             message = ". . .",
-            type = 0
+            type = 0,
+            status = LOADING
         )
         val saveMessageId = messageRepository.insert(messageObject)
         val tempMessage = messageRepository.getMessageById(saveMessageId).firstOrNull()!!
         Log.i("MainActivity", "TempMessage Is : $tempMessage")
-
         val response = messageRepository.sendMessage(allMessagesConcatenated, temperature, frequencyPenalty)
         response.enqueue(object : Callback<SendMessageResponse> {
             override fun onResponse(
@@ -52,21 +64,23 @@ class MessageViewModel @Inject constructor(
                     val text = response.body()?.choices?.firstOrNull()?.text?.trimStart()
                     text?.let {
                         tempMessage.message = it
+                        tempMessage.status = SUCCESS
                         saveMessage(tempMessage)
                     }
                 } else {
                     Log.i("MainActivity", call.toString())
                     Log.i("MainActivity", response.toString())
-                    Log.i("MainActivity", response.body().toString())
+                    Log.i("MainActivity", response.body()?.error!!.message)
+                    val text = response.body()?.error!!.message
+                    tempMessage.message  = text
+                    tempMessage.status = ERROR
                 }
             }
 
             override fun onFailure(call: Call<SendMessageResponse>, t: Throwable) {
-                var message = "Error:\n"
-                when (t) {
-                    is SocketTimeoutException -> message += "응답 시간이 초과되었습니다."
-                }
+                var message = "Error: " + t.message
                 tempMessage.message = message
+                tempMessage.status = ERROR
                 saveMessage(tempMessage)
                 Log.i("MainActivity", "Fail API")
                 Log.e("MainActivity", t.toString())

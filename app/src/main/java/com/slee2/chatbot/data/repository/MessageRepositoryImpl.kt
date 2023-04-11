@@ -55,6 +55,10 @@ class MessageRepositoryImpl @Inject constructor (
         return db.messageDao().getAllMessagesConcatenated()
     }
 
+    override fun getLastTowMessage(): Flow<String> {
+        return db.messageDao().getLastTowMessage()
+    }
+
     @WorkerThread
     override suspend fun removeAll() {
         db.messageDao().deleteAll()

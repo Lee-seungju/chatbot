@@ -6,7 +6,7 @@ import com.slee2.chatbot.data.model.Setting
 
 @Database(
     entities = [Setting::class],
-    version = 1, exportSchema = false
+    version = 2, exportSchema = false
 )
 abstract class SettingRoomDatabase : RoomDatabase() {
 
