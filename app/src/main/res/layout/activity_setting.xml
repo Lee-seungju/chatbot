@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.view.SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/back_btn"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/back"/>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginHorizontal="30dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Setting"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperature"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/green_dark"
+                />
+            <TextView
+                android:id="@+id/tpProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.0"
+                android:textSize="50dp"
+                android:textStyle="italic"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal" >
+
+                <SeekBar
+                    android:id="@+id/tpSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:max="20"
+                    android:progress="10"
+                    android:progressDrawable="@drawable/seek_bar_progress"
+                    android:thumb="@drawable/seek_bar_thumb" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frequency Penalty"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/green_dark"
+                />
+            <TextView
+                android:id="@+id/fpProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:textSize="50dp"
+                android:textStyle="italic"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal" >
+
+                <SeekBar
+                    android:id="@+id/fpSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:max="40"
+                    android:progress="20"
+                    android:progressDrawable="@drawable/seek_bar_progress"
+                    android:thumb="@drawable/seek_bar_thumb" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginVertical="10dp"
+            android:text="SAVE"
+            android:textSize="20dp"
+            android:textColor="@color/green_dark"
+            android:background="@color/green_bright"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reset_btn"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginVertical="10dp"
+            android:text="Chat Reset"
+            android:textSize="20dp"
+            android:textColor="@color/green_bright"
+            android:background="@color/green_dark"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginVertical="10dp"
+            android:text="Share"
+            android:textSize="20dp"
+            android:textColor="@color/green_dark"
+            android:background="@color/green_bright"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
