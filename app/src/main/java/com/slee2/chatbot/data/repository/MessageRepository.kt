@@ -20,10 +20,12 @@ interface MessageRepository {
 
     fun getAllMessagesConcatenated(): Flow<String>
 
-    fun getLastTowMessage(): Flow<String>
+//    fun getLastTowMessage(): Flow<String>
     suspend fun removeAll()
 
     fun getAllMessage(): Flow<List<Message>>
+
+    fun getAllMessageRecent(): Flow<List<Message>>
 
     suspend fun saveSortMode(mode: String)
 
