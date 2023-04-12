@@ -9,13 +9,14 @@ import com.slee2.chatbot.utils.StatusType.SUCCESS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,17 +30,20 @@ class MessageViewModel @Inject constructor(
 
     fun sendMessage(message: String,
                     temperature: Double,
-                    frequencyPenalty: Double
+                    frequencyPenalty: Double,
+                    messageList: List<Message>
     ) = viewModelScope.launch(Dispatchers.IO) {
         var allMessagesConcatenated = "\n" + message
-        val lastTowMessage = messageRepository.getLastTowMessage()
-        lastTowMessage.map {
-            if ((allMessagesConcatenated + it).length < 3900) {
-                allMessagesConcatenated = "\n" + it + allMessagesConcatenated
-            } else {
-                return@map
-            }
+        Log.i("MainActivity", "allMessage: $messageList")
+        var index = messageList.lastIndex
+        println(index)
+        while (index >= 0
+            && (allMessagesConcatenated + messageList[index].message).length < 512) {
+            allMessagesConcatenated = "\n" + messageList[index].message + allMessagesConcatenated
+            index--
         }
+
+        Log.i("MainActivity", "MessageConcate: $allMessagesConcatenated")
 
         val messageObject = Message(
             message = ". . .",
@@ -57,33 +61,34 @@ class MessageViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     Log.i("MainActivity", "Success API")
-                    Log.i("MainActivity", call.toString())
-                    Log.i("MainActivity", response.toString())
-
                     Log.i("MainActivity", response.body()?.choices?.firstOrNull()?.text!!)
                     val text = response.body()?.choices?.firstOrNull()?.text?.trimStart()
                     text?.let {
                         tempMessage.message = it
                         tempMessage.status = SUCCESS
-                        saveMessage(tempMessage)
                     }
                 } else {
-                    Log.i("MainActivity", call.toString())
-                    Log.i("MainActivity", response.toString())
-                    Log.i("MainActivity", response.body()?.error!!.message)
-                    val text = response.body()?.error!!.message
+                    Log.i("MainActivity", "Failed API")
+                    var text = "Error Message: "
+                    response.errorBody()?.let {
+                        val errorJsonString = it.string()
+                        val errorMessage = JSONObject(errorJsonString)
+                            .getJSONObject("error").getString("message")
+                        Log.i("MainActivity", "Error Message: $errorMessage")
+                        text += errorMessage
+                    }
                     tempMessage.message  = text
                     tempMessage.status = ERROR
                 }
+                saveMessage(tempMessage)
             }
 
             override fun onFailure(call: Call<SendMessageResponse>, t: Throwable) {
+                Log.i("MainActivity", "Error API")
                 var message = "Error: " + t.message
                 tempMessage.message = message
                 tempMessage.status = ERROR
                 saveMessage(tempMessage)
-                Log.i("MainActivity", "Fail API")
-                Log.e("MainActivity", t.toString())
             }
         })
     }

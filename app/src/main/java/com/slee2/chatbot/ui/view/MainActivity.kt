@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
                 }
-                messageViewModel.sendMessage(message, temperature, frequencyPenalty)
+                messageViewModel.sendMessage(message, temperature, frequencyPenalty, messageList)
                 Log.i("MainActivity", "Save Success")
 
                 // 입력 부분 초기화

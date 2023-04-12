@@ -55,9 +55,9 @@ class MessageRepositoryImpl @Inject constructor (
         return db.messageDao().getAllMessagesConcatenated()
     }
 
-    override fun getLastTowMessage(): Flow<String> {
-        return db.messageDao().getLastTowMessage()
-    }
+//    override fun getLastTowMessage(): Flow<String> {
+//        return db.messageDao().getLastTowMessage()
+//    }
 
     @WorkerThread
     override suspend fun removeAll() {
@@ -66,6 +66,10 @@ class MessageRepositoryImpl @Inject constructor (
 
     override fun getAllMessage(): Flow<List<Message>> {
         return db.messageDao().getAllMessage()
+    }
+
+    override fun getAllMessageRecent(): Flow<List<Message>> {
+        return db.messageDao().getAllMessageRecent()
     }
 
     // DataStore

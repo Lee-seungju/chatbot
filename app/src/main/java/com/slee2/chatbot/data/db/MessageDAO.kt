@@ -17,12 +17,15 @@ interface MessageDAO {
     @Query("SELECT GROUP_CONCAT(message, '\n') FROM message WHERE status = $SUCCESS")
     fun getAllMessagesConcatenated(): Flow<String>
 
-    @Query("SELECT message FROM message ORDER BY _id DESC LIMIT 2")
-    fun getLastTowMessage(): Flow<String>
+//    @Query("SELECT message FROM message ORDER BY _id DESC LIMIT 2")
+//    fun getLastTowMessage(): Flow<String>
 
     @Query("DELETE FROM message")
     suspend fun deleteAll()
 
     @Query("SELECT * FROM message ORDER BY _id ASC")
     fun getAllMessage(): Flow<List<Message>>
+
+    @Query("SELECT * FROM message ORDER BY _id DESC")
+    fun getAllMessageRecent(): Flow<List<Message>>
 }

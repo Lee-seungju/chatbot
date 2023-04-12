@@ -165,15 +165,15 @@
             android:background="@color/green_dark"
             />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginVertical="10dp"
-            android:text="Share"
-            android:textSize="20dp"
-            android:textColor="@color/green_dark"
-            android:background="@color/green_bright"
-            />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="55dp"-->
+<!--            android:layout_marginVertical="10dp"-->
+<!--            android:text="Share"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textColor="@color/green_dark"-->
+<!--            android:background="@color/green_bright"-->
+<!--            />-->
 
     </LinearLayout>
 
