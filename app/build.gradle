@@ -24,7 +24,11 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        buildConfigField("String", "GPT_API_KEY","\"${localProperties.getProperty('GPT_API_KEY')}\"")
+        if (System.getenv("APP_API_KEY") != null) {
+            buildConfigField("String", "GPT_API_KEY", "\"${System.getenv("APP_API_KEY")}\"")
+        } else {
+            buildConfigField("String", "GPT_API_KEY", "\"${localProperties.getProperty('GPT_API_KEY')}\"")
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
