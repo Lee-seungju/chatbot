@@ -24,3 +24,8 @@ jobs:
       with:
         name: app
         path: app/build/outputs/apk/debug
+    - name: Decode APP_API_KEY
+      run: |
+        export APP_API_KEY=$(echo "$CHAT_GPT_API_KEY_BASE64" | base64 -d)
+      env:
+        APP_API_KEY_BASE64: ${{ secrets.CHAT_GPT_API_KEY_BASE64 }}
